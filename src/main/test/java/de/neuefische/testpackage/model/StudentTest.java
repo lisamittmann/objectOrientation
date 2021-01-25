@@ -40,5 +40,12 @@ public class StudentTest {
         assertEquals(matriculationNumber, student.getMatriculationNumber());
     }
 
+    @ParameterizedTest
+    @MethodSource("student")
+    public void testGetStudentInformation(String firstName, String lastName, int matriculationNumber) {
+        Student student = new Student(firstName, lastName, matriculationNumber);
+        String studentInformation = "Student name: " + firstName + " " + lastName + ", matriculation number: " + matriculationNumber;
+        assertEquals(studentInformation, student.getStudentInformation());
+    }
 
 }
