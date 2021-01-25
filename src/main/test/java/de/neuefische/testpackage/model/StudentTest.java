@@ -48,4 +48,20 @@ public class StudentTest {
         assertEquals(studentInformation, student.getStudentInformation());
     }
 
+    @ParameterizedTest
+    @MethodSource("studentObjects")
+    public void testStudentEqualsAndHash(Student student1, Student student2, boolean expected) {
+
+        assertEquals(expected, student1.equals(student2));
+        assertEquals(expected, student1.hashCode() == student2.hashCode());
+
+    }
+
+    private static Stream<Arguments> studentObjects(){
+        return  Stream.of(
+                arguments(new Student("Franz", "Zimmer", 445), new Student("Franz", "Zimmer", 445), true),
+                arguments(new Student("Marvin", "Neu", 223), new Student("Marvin", "Alt", 234), false)
+        );
+    }
+
 }
