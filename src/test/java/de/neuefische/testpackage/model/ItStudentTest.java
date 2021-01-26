@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class StudentTest {
+public class ItStudentTest {
 
     @ParameterizedTest
     @MethodSource("student")
     public void testStudentGetterAndSetterFirstName(String firstName, String lastName, int matriculationNumber) {
-        Student student = new Student(firstName, lastName, matriculationNumber);
+        ItStudent student = new ItStudent(firstName, lastName, matriculationNumber);
         assertEquals(firstName, student.getFirstName());
     }
 
@@ -29,28 +29,28 @@ public class StudentTest {
     @ParameterizedTest
     @MethodSource("student")
     public void testStudentGetterAndSetterLastName(String firstName, String lastName, int matriculationNumber) {
-        Student student = new Student(firstName, lastName, matriculationNumber);
+        ItStudent student = new ItStudent(firstName, lastName, matriculationNumber);
         assertEquals(lastName, student.getLastName());
     }
 
     @ParameterizedTest
     @MethodSource("student")
     public void testStudentGetterAndSetterMatriculationNumber(String firstName, String lastName, int matriculationNumber) {
-        Student student = new Student(firstName, lastName, matriculationNumber);
+        ItStudent student = new ItStudent(firstName, lastName, matriculationNumber);
         assertEquals(matriculationNumber, student.getMatriculationNumber());
     }
 
     @ParameterizedTest
     @MethodSource("student")
     public void testGetStudentInformation(String firstName, String lastName, int matriculationNumber) {
-        Student student = new Student(firstName, lastName, matriculationNumber);
+        ItStudent student = new ItStudent(firstName, lastName, matriculationNumber);
         String studentInformation = "Student name: " + firstName + " " + lastName + ", matriculation number: " + matriculationNumber;
         assertEquals(studentInformation, student.toString());
     }
 
     @ParameterizedTest
     @MethodSource("studentObjects")
-    public void testStudentEqualsAndHash(Student student1, Student student2, boolean expected) {
+    public void testStudentEqualsAndHash(ItStudent student1, ItStudent student2, boolean expected) {
 
         assertEquals(expected, student1.equals(student2));
         assertEquals(expected, student1.hashCode() == student2.hashCode());
@@ -59,8 +59,8 @@ public class StudentTest {
 
     private static Stream<Arguments> studentObjects(){
         return  Stream.of(
-                arguments(new Student("Franz", "Zimmer", 445), new Student("Franz", "Zimmer", 445), true),
-                arguments(new Student("Marvin", "Neu", 223), new Student("Marvin", "Alt", 234), false)
+                arguments(new ItStudent("Franz", "Zimmer", 445), new ItStudent("Franz", "Zimmer", 445), true),
+                arguments(new ItStudent("Marvin", "Neu", 223), new ItStudent("Marvin", "Alt", 234), false)
         );
     }
 
