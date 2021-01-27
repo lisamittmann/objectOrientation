@@ -1,12 +1,16 @@
 package de.neuefische.testpackage;
 
-import de.neuefische.testpackage.model.Student;
+import de.neuefische.testpackage.model.ItStudent;
+import de.neuefische.testpackage.model.StudentDb;
 
 public class AppMain {
 
     public static void main(String[] args) {
-        Student testStudent = new Student("Marvin", "Student", 567);
+        ItStudent testStudent = new ItStudent("Marvin", "Student", 567);
 
-        System.out.println(testStudent.toString());
+        StudentDb studentDb = new StudentDb(new ItStudent[]{new ItStudent("Marvin", "Kekse", 224),
+                new ItStudent("Steven", "Mueller", 776)});
+
+        System.out.println(studentDb.getRandomStudent());
     }
 }
