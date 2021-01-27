@@ -2,43 +2,21 @@ package de.neuefische.testpackage.model;
 
 import java.util.Objects;
 
-public class ItStudent implements Student {
+public class ItStudent extends Student {
 
-    private String firstName;
-    private String lastName;
-    private int matriculationNumber;
+    String[] modules;
 
     public ItStudent(String firstName, String lastName, int matriculationNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.matriculationNumber = matriculationNumber;
+        super(firstName, lastName, matriculationNumber);
     }
 
     @Override
-    public String getFirstName() {
-        return firstName;
+    public String[] getModules() {
+        return modules;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    @Override
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public int getMatriculationNumber() {
-        return matriculationNumber;
-    }
-
-    public void setMatriculationNumber(int matriculationNumber) {
-        this.matriculationNumber = matriculationNumber;
+    public void setModules(String[] modules) {
+        this.modules = modules;
     }
 
     @Override

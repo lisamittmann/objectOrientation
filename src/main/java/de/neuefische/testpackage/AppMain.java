@@ -1,5 +1,7 @@
 package de.neuefische.testpackage;
 
+import de.neuefische.testpackage.linkedList.Animal;
+import de.neuefische.testpackage.linkedList.AnimalListItem;
 import de.neuefische.testpackage.model.ItStudent;
 import de.neuefische.testpackage.model.StudentDb;
 

@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,18 +32,18 @@ public class StudentDbTest {
 
     @ParameterizedTest
     @MethodSource("studentAddList")
-    public void testAddStudent(StudentDb studentDb, ItStudent addStudent, StudentDb expected) {
+    public void testAddStudent(StudentDb studentDb, Student addStudent, StudentDb expected) {
         studentDb.addStudent(addStudent);
         assertTrue(expected.equals(studentDb));
     }
 
     private static Stream<Arguments> studentAddList() {
         return Stream.of(
-                arguments(new StudentDb(new ItStudent[]{new ItStudent("Marvin", "Kekse", 224),
-                                new ItStudent("Steven", "Mueller", 776)}),
+                arguments(new StudentDb(new Student[]{new ItStudent("Marvin", "Kekse", 224),
+                                new BiologyStudent("Steven", "Mueller", 776)}),
                         new ItStudent("Mavor", "Green", 889),
-                        new StudentDb(new ItStudent[]{new ItStudent("Marvin", "Kekse", 224),
-                                new ItStudent("Steven", "Mueller", 776),
+                        new StudentDb(new Student[]{new ItStudent("Marvin", "Kekse", 224),
+                                new BiologyStudent("Steven", "Mueller", 776),
                                 new ItStudent("Mavor", "Green", 889)}))
         );
     }
