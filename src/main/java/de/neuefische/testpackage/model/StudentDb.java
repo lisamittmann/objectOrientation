@@ -1,63 +1,73 @@
 package de.neuefische.testpackage.model;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class StudentDb {
 
-    private Student[] studentList;
+    private HashMap<Integer, Student> studentList = new HashMap<Integer, Student>();
 
 
-    public StudentDb(Student[] input) {
+    public StudentDb(ArrayList<Student> input) {
 
-        this.studentList = input;
+        for (Student student : input) {
+            studentList.put(student.getMatriculationNumber(), student);
+        }
 
     }
 
-    public Student[] listStudents() {
+    public ArrayList<Student> listStudents() {
 
-        return this.studentList;
+        ArrayList<Student> students = new ArrayList<Student>();
+
+        studentList.forEach((k, v) -> {
+            students.add(v);
+        });
+
+        return students;
     }
 
     @Override
     public String toString() {
         String studentListString = "";
-        for(int i = 0; i < this.studentList.length; i++){
-            studentListString += "(" + this.studentList[i] + ")";
+        ArrayList<Student> studentArray = this.listStudents();
+
+        for(int i = 0; i < studentArray.size(); i++){
+            studentListString += "(" + studentArray.get(i) + ")";
         }
         return studentListString;
     }
 
     public String getRandomStudent() {
-        return this.studentList[(int)(Math.random()*studentList.length)].toString();
+         ArrayList<Student> studentArray = this.listStudents();
+
+        return studentArray.get((int)(Math.random()*studentArray.size())).toString();
     }
 
     public void addStudent(Student student) {
 
-        Student[] newList = new Student[this.studentList.length + 1];
-
-        for(int i = 0; i < this.studentList.length; i++) {
-            newList[i] = this.studentList[i];
+        if(containsStudent(student)){
+            throw new RuntimeException("Student number already exists");
         }
 
-        newList[this.studentList.length] = student;
-        this.studentList = newList;
+        this.studentList.put(student.getMatriculationNumber(), student);
 
+    }
+
+    public Optional<Student> findById(int id) {
+        if (this.studentList.containsKey(id)) {
+            return Optional.of(this.studentList.get(id));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private boolean containsStudent(Student student) {
+        return this.studentList.containsKey(student.getMatriculationNumber());
     }
 
     public void removeStudent(Student student) {
 
-        Student[] newList = new Student[this.studentList.length - 1];
-        int changeIndex = 0;
-
-        for(int i = 0; i < this.studentList.length; i++) {
-            if(this.studentList[i].equals(student)) {
-                changeIndex += 1;
-            } else {
-                newList[i - changeIndex] = this.studentList[i];
-            }
-        }
-
-        this.studentList = newList;
+        this.studentList.remove(student.getMatriculationNumber());
     }
 
     @Override
@@ -65,11 +75,11 @@ public class StudentDb {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StudentDb studentDb = (StudentDb) o;
-        return Arrays.equals(studentList, studentDb.studentList);
+        return Objects.equals(studentList, studentDb.studentList);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(studentList);
+        return Objects.hash(studentList);
     }
 }
